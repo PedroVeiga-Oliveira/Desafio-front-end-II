@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Início — formulário</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1> <strong>Página Inicial</strong> </h1>
+      <p> <strong> Aluno: </strong> Pedro Veiga Oliveira <strong>|</strong> <strong> Curso: </strong> Análise e Desenvolvimento de Sistemas <strong>|</strong> <strong> Matéria: </strong> Desenolvimento de Front-End II </p>
+    </header>
+
+    <section class="card">
+      <h2> <strong> *Sobre a minha pessoa* </strong> </h2>
+      <p>Meu nome é <strong>Pedro Veiga Oliveira </strong>,mas conhecido como Pedrinho. Sou de São Vicente de Minas, sou estudante de Análise e Desenvolvimento de Sistemas.</p>
+      <a class="btn" href="form.html">Acessar o formulário</a>
+    </section>
+
+    <section class="card">
+      <h2> <strong> *Último envio* </strong> </h2>
+      <pre id="lastSubmission">Nenhum envio salvo.</pre>
+    </section>
+  </main>
+
+  <script>
+    const last = localStorage.getItem('lastSubmission');
+    const pre = document.getElementById('lastSubmission');
+    if (last) {
+      try {
+        const obj = JSON.parse(last);
+        pre.textContent = `Nome: ${obj.nome} ${obj.sobrenome}\nEmail: ${obj.email}\nIdade: ${obj.idade}`;
+      } catch(e){
+        pre.textContent = last;
+      }
+    }
+  </script>
+</body>
+</html>

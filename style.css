@@ -1,0 +1,18 @@
+/* style.css */
+:root{
+  font-family: Arial, sans-serif;
+  color: #000000;
+}
+body { margin: 0; background:#bfffb7; }
+.container { max-width:710px; margin:32px auto; padding:20px; }
+header h1 { margin:0 0 10px; }
+.card { background:white; padding:20px; border-radius:8px; box-shadow: 0 5px 10px rgba(0,0,0,0.06); margin-bottom:20px; }
+label { display:block; margin-bottom:12px; }
+input[type="text"], input[type="email"], input[type="number"]{
+  width:100%; padding:10px; border:5px solid #ffffff; border-radius:10px; box-sizing:border-box;
+}
+.actions { display:flex; gap:10px; margin-top:15px; }
+.btn { display:inline-block; padding:10px 15px; background:#005dc0; color:rgb(255, 255, 255); text-decoration:none; border:none; border-radius:10px; cursor:pointer; }
+.btn.ghost { background: transparent; border:1px solid #ccc; color:#333; }
+.error { color:#df182c; font-size:0.9em; display:block; height:20px; }
+pre { white-space:pre-wrap; word-break:break-word; }

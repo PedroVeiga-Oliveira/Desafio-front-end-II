@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Formulário</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1> <strong>Formulário</strong> </h1>
+
+    <form id="form">
+      <label> <strong> Nome: </strong>
+        <input id="nome" name="nome" type="text" />
+        <small class="error" id="err-nome"></small>
+      </label>
+
+      <label> <strong> Sobrenome: </strong>
+        <input id="sobrenome" name="sobrenome" type="text" />
+        <small class="error" id="err-sobrenome"></small>
+      </label>
+
+      <label> <strong> Email: </strong>
+        <input id="email" name="email" type="email" />
+        <small class="error" id="err-email"></small>
+      </label>
+
+      <label> <strong> Idade: </strong>
+        <input id="idade" name="idade" type="number" min="0" />
+        <small class="error" id="err-idade"></small>
+      </label>
+
+      <div class="actions">
+        <button type="submit" class="btn"> <strong> Enviar </strong></button>
+        <a href="index.html" class="btn ghost"><strong> Voltar </strong></a>
+      </div>
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    const form = document.getElementById('form');
+    const stored = sessionStorage.getItem('formData');
+    if (stored) {
+      const data = JSON.parse(stored);
+      document.getElementById('nome').value = data.nome || '';
+      document.getElementById('sobrenome').value = data.sobrenome || '';
+      document.getElementById('email').value = data.email || '';
+      document.getElementById('idade').value = data.idade || '';
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const data = collectAndValidateForm();
+      if (data) {
+        sessionStorage.setItem('formData', JSON.stringify(data));
+        window.location.href = 'confirmation.html';
+      }
+    });
+  </script>
+</body>
+</html>

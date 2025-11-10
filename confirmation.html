@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Confirmação de Dados</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1> <strong> Confirme os dados preenchidos </strong> </h1>
+    <div class="card">
+      <p><strong>Nome:</strong> <span id="c-nome"></span></p>
+      <p><strong>Sobrenome:</strong> <span id="c-sobrenome"></span></p>
+      <p><strong>Email:</strong> <span id="c-email"></span></p>
+      <p><strong>Idade:</strong> <span id="c-idade"></span></p>
+
+      <div class="actions">
+        <button id="confirmBtn" class="btn">Confirmar</button>
+        <button id="editBtn" class="btn ghost"> <strong> Não confirmar </strong> (Editar)</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    const dataJson = sessionStorage.getItem('formData');
+    if (!dataJson) {
+      window.location.href = 'form.html';
+    } else {
+      const data = JSON.parse(dataJson);
+      document.getElementById('c-nome').textContent = data.nome;
+      document.getElementById('c-sobrenome').textContent = data.sobrenome;
+      document.getElementById('c-email').textContent = data.email;
+      document.getElementById('c-idade').textContent = data.idade;
+
+      document.getElementById('editBtn').addEventListener('click', () => {
+        window.location.href = 'form.html';
+      });
+
+      document.getElementById('confirmBtn').addEventListener('click', () => {
+        localStorage.setItem('lastSubmission', JSON.stringify(data));
+        const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'data.json';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        sessionStorage.removeItem('formData');
+        window.location.href = 'index.html';
+      });
+    }
+  </script>
+</body>
+</html>
